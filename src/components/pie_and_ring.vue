@@ -99,49 +99,6 @@ export default {
     },
   },
   computed: {
-    // paths() {
-    //   let arr = [];
-    //   let total=0;
-    //   let count=0;
-    //   this.list.forEach((a) => {
-    //     arr.push({value:a,hover:false});
-    //     total+=a;
-    //     if (this.type=='pie') {
-    //
-    //     } else {
-    //       total+=(this.gap*2);
-    //     }
-    //   })
-    //   arr.forEach((a, i) => {
-    //
-    //     if (this.type=='pie') {
-    //       a.line=`M0,0`;
-    //       a.line+=`L${this.getAngel(count,total).x*400},${this.getAngel(count,total).y*400}`;
-    //       a.line+=`A400,400,0,${(a.value/total>0.5)?1:0},1,${this.getAngel(count+a.value,total).x*400},${this.getAngel(count+a.value,total).y*400}`;
-    //       a.line+="Z";
-    //               count+=a.value;
-    //     } else {
-    //       a.line=`M${this.getAngel(count+this.gap,total).x*300},${this.getAngel(count+this.gap,total).y*300}`;
-    //       a.line+=`L${this.getAngel(count+this.gap,total).x*400},${this.getAngel(count+this.gap,total).y*400}`;
-    //       a.line+=`A400,400,0,${(a.value/total>0.5)?1:0},1,${this.getAngel(count+a.value,total).x*400},${this.getAngel(count+a.value,total).y*400}`;
-    //       a.line+=`L${this.getAngel(count+a.value,total).x*300},${this.getAngel(count+a.value,total).y*300}`;
-    //       a.line+=`A300,300,0,${(a.value/total>0.5)?1:0},0,${this.getAngel(count+this.gap,total).x*300},${this.getAngel(count+this.gap,total).y*300}`;
-    //       a.line+="Z";
-    //               count+=a.value+this.gap*2;
-    //     }
-    //
-    //
-    //
-    //     let color=Math.floor((Math.random()*0xffffff)).toString(16);
-    //     while(color.length<6)
-    //     {
-    //       color="0"+color;
-    //     }
-    //     a.color=color;
-    //   });
-    //   return arr;
-    // },
-
   }
 }
 </script>

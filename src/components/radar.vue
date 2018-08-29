@@ -7,7 +7,7 @@
       <text v-for="t in circle" x="5" :y="-t+20">{{t}}</text>
       <path v-for="l in lines" class="tick-line" fill="none" :d="`M0,0 L${l.ex},${l.ey}Z`" style="stroke: rgb(255, 255, 255); stroke-width: 2;"></path>
     </g>
-<path v-for="p in paths" class="radar-line" :fill="`#${p.color}`" :stroke="`#${p.color}`" fill-opacity="0.2" :d="p.line" ></path>
+    <path v-for="p in paths" class="radar-line" :fill="`#${p.color}`" :stroke="`#${p.color}`" fill-opacity="0.2" :d="p.line" ></path>
   </g>
   </svg>
 </template>

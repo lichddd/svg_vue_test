@@ -13,7 +13,7 @@
 <!-- </div> -->
     <div class="menu">
 
-      <router-link style="margin-right:20px;" v-for="r in router" v-if="r.name" :to="r.path">{{r.name}}</router-link>
+      <router-link style="margin-right:20px;" :key="r.name" v-for="r in router" v-if="r.name" :to="r.path">{{r.name}}</router-link>
     </div>
     <div class="continer">
       <div>
