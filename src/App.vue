@@ -72,7 +72,8 @@ body{
   }
   .continer > div{
     width: 100%;
-    height: calc(100% - 5px);
+    height: 100%;
     position: absolute;
+    overflow: hidden;
   }
 </style>

@@ -6,7 +6,9 @@ import pie_and_ring from '@/components/pie_and_ring'
 import force from '@/components/force'
 import bp from '@/components/bp'
 import chord from '@/components/chord'
+import visio from '@/components/visio'
 Vue.use(Router)
+
 
 export default new Router({
   routes: [
@@ -45,5 +47,10 @@ export default new Router({
       name: '弦图 各经济体交易量',
       component: chord
     },
+    {
+          path: '/visio',
+          name: '流程图',
+          component: visio
+        },
   ]
 })
