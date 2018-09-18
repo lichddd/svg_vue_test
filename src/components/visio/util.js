@@ -39,7 +39,7 @@ export default {
         for (var i = 0; i < count; i++) {
           let ang=i*data.point_num/count;
           ang=(ang%1>0.5)?Math.ceil(ang):Math.floor(ang);
-          arr.push({x:this.getAngel(ang,data.point_num).x,y:this.getAngel(ang,data.point_num).y});
+          arr.push({x:Number(this.getAngel(ang,data.point_num).x.toFixed(2)),y:Number(this.getAngel(ang,data.point_num).y.toFixed(2))});
         }
         return arr;
         break;
