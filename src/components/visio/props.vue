@@ -7,12 +7,18 @@
       <template v-if="item">
 
 
-          <template  v-for="(v,k) in item">
+          <template  v-for="(v,k) in item" v-if="(k=='width'||k=='height'||k=='x'||k=='y'||k=='color'||k=='name')">
           {{k}}:　
-          <p  v-if="!(k=='width'||k=='height'||k=='x'||k=='y'||k=='color'||k=='point_num')">{{k}}:　{{v}}</p>
-          <input v-if="k=='width'||k=='height'||k=='x'||k=='y'||k=='color'||k=='point_num'" :type="k=='color'?'color':'text'" v-model="item[k]"></input>
+          <p  v-if="!(k=='width'||k=='height'||k=='x'||k=='y'||k=='color'||k=='name')">{{v}}</p>
+          <input v-if="k=='width'||k=='height'||k=='x'||k=='y'" type="number" v-model.number="item[k]"></input>
+          <input v-if="k=='color'" type="color" v-model="item[k]"></input>
+          <input v-if="k=='name'" type="text" v-model="item[k]"></input>
       </template></template>
+      <template v-if="edge">
 
+        {{edge.from.item.name}}->{{edge.to.item.name}}
+
+      </template>
 
     </div>
   </div>
@@ -21,19 +27,29 @@
 <script>
 export default {
   name: 'props',
+  props:{
+    item:{
+      type:Object,
+      default(){
+        return {};
+      },
+    },
+    edge:{
+      type:Object,
+      default(){
+        return {};
+      },
+    },
+  },
   data(){
     return {
-      item:null,
     };
   },
   mounted()
   {
   },
   methods:{
-    changeItem(data)
-    {
-      this.item=data;
-    }
+
   }
 }
 </script>

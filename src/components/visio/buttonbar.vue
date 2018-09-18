@@ -1,6 +1,12 @@
 <template>
   <div class="buttonbar">
-
+    <button v-if="state.zoomin" type="button" name="button" @click="$emit('COMMOND','zoomin')">zoomin</button>
+    <button v-if="state.zoomout" type="button" name="button" @click="$emit('COMMOND','zoomout')">zoomout</button>
+    <button v-if="state.zoom1" type="button" name="button" @click="$emit('COMMOND','zoom1')">1:1</button>
+    <button v-if="state.center" type="button" name="button" @click="$emit('COMMOND','center')">center</button>
+    <button v-if="state.delete" type="button" name="button" @click="$emit('COMMOND','del')">del</button>
+    <button v-if="state.undo" type="button" name="button" @click="$emit('COMMOND','undo')">undo</button>
+    <button v-if="state.redo" type="button" name="button" @click="$emit('COMMOND','redo')">redo</button>
   </div>
 </template>
 
@@ -10,12 +16,17 @@ export default {
   name: 'App',
   data(){
     return {
+      state:{},
     };
   },
   mounted()
   {
   },
   methods:{
+    updateState(data)
+    {
+      this.$set(this,'state',data);
+    },
   }
 }
 </script>

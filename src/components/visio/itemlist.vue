@@ -1,12 +1,12 @@
 <template>
-  <div class="itemlist">
+  <div class="itemlist" :class="{'add-cursor':add_item}">
     <svg
     v-for="item in item_list"
     xmlns="http://www.w3.org/2000/svg"
     :viewBox="`0 0 ${width} ${width}`"
     version="1.1"
     preserveAspectRatio="xMid yMid meet"
-    @click="$emit('ADD_ITEM',item)"
+    @mousedown.stop="add(item)"
     >
       <g :transform="`translate(${width/2},${width/2})`">
 
@@ -60,9 +60,9 @@ export default {
       type:Array,
       default(){
         return [
-      {name:"分叉节点",shape:"polygon",width:"80",height:"50",point_num:5,color:color.randomColor()},
-      {name:"分叉节点",shape:"polygon",width:"80",height:"80",point_num:6,color:color.randomColor()},
-      {name:"分叉节点",shape:"polygon",width:"80",height:"50",point_num:7,color:color.randomColor()},
+      {name:"分叉节点",shape:"polygon",width:80,height:50,point_num:5,color:color.randomColor()},
+      {name:"分叉节点",shape:"polygon",width:80,height:80,point_num:6,color:color.randomColor()},
+      {name:"分叉节点",shape:"polygon",width:80,height:50,point_num:7,color:color.randomColor()},
       // {name:"分叉节点",shape:"polygon",width:"80",height:"50",point_num:5},
       //         {name:"分叉节点",shape:"polygon",width:"80",height:"80",point_num:6},
       //                 {name:"分叉节点",shape:"polygon",width:"80",height:"50",point_num:7},
@@ -80,24 +80,29 @@ export default {
       width:1000,
       gap:100,
       default_items:[
-        {name:"常规节点",shape:"rect",width:"80",height:"60",radius:"10",color:"#321455"},
+        {name:"常规节点",shape:"rect",width:160,height:120,radius:10,color:"#321455"},
         //ellipse形状如要正圆肯定是长宽相等
-        {name:"起止节点",shape:"ellipse",width:"80",height:"60",color:"#3ff455"},
+        {name:"起止节点",shape:"ellipse",width:80,height:60,color:"#3ff455"},
         //polygon多边形形状会按照长宽和节点数生成节点以中心平均分布在360°上
-        {name:"分叉节点",shape:"polygon",width:"80",height:"50",point_num:4,color:"#321ff5"},
+        {name:"分叉节点",shape:"polygon",width:80,height:50,point_num:4,color:"#321ff5"},
         //path形状的d属性为一个路径里面需要有长宽属性作为变量 写作 @width/2@ @height*2@ 用@与普通文本分隔开
-        {name:"模型节点",shape:"path",width:"80",height:"40",color:"#3ffff5",
+        {name:"模型节点",shape:"path",width:160,height:80,color:"#3ffff5",
         d:"M-@width/4@,-@height/2@ H@width/4@ A@width/4@,@height/2@,0,0,1,@width/4@,@height/2@  H-@width/4@ A@width/4@,@height/2@,0,0,1,-@width/4@,-@height/2@",
-        anchors:[ {x:"-width/2",y:"0"},
-                  {x:"0",y:"-height/2"},
-                  {x:"width/2",y:"0"},
-                  {x:"0",y:"height/2"},
+        anchors:[ {x:-1/2,y:0},
+                  {x:0,y:-1/2},
+                  {x:1/2,y:0},
+                  {x:0,y:1/2},
                 ]},
       ],
+      add_item:null,
     };
   },
   mounted()
   {
+    document.addEventListener('mouseup', this.removeAdd);
+  },
+  beforeDestroy() {
+    document.removeEventListener('mouseup', this.removeAdd);
   },
   computed:{
     item_list(){
@@ -129,15 +134,24 @@ export default {
     },
     getD(width,height,d){
       d=d.split("@");
-      console.log(d);
       for (var i = 0; i < d.length; i++) {
         if (d[i].indexOf('width')>-1||d[i].indexOf('height')>-1) {
           let t=d[i].replace(/width/ig,(this.width-this.gap*2)*width/(Math.max(width,height))).replace(/height/ig,(this.width-this.gap*2)*height/(Math.max(width,height)));
-          console.log(t);
           d[i]=eval(t);
         }
       }
       return d.join("");
+    },
+
+
+    add(item){
+      this.add_item=Object.assign({
+              x: -9999,
+              y: -9999,
+              }, item);
+    },
+    removeAdd(){
+      this.add_item=null;
     }
   }
 }
@@ -150,6 +164,12 @@ export default {
   background: #F7F9FB;
   border-right: 1px solid #E6E9ED;
   overflow-y: auto;
+}
+.itemlist svg{
+  cursor: pointer;
+}
+.add-cursor.itemlist svg{
+  cursor: copy!important;
 }
 svg{
   width: 50%;

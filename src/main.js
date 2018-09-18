@@ -4,6 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import crypto from 'crypto'
+console.log(crypto.createHash('md5').update('abc').digest('hex'));
+
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

@@ -1,13 +1,23 @@
 <template>
 <div class="visio">
-<buttonbar class="top"></buttonbar>
-  <div class="main">
-    <viewport ref="viewport" @SELECT_ITEM_CHANGE="(data)=>{$refs.props.changeItem(data)}"></viewport>
-    <itemlist @ADD_ITEM="(data)=>{$refs.viewport.addItem(data)}"></itemlist>
+<buttonbar class="top" ref="buttonbar" @COMMOND="(code)=>{$refs.viewport.commond(code);}"></buttonbar>
+  <div class="main" :class="{'add-cursor':$refs.itemlist&&$refs.itemlist.add_item}">
+    <viewport
+    ref="viewport"
+    @STATE_CHANGE="(data,svg)=>{$refs.buttonbar.updateState(data);$refs.minimap.updateSVG(svg)}"
+    :add_item="$refs.itemlist&&$refs.itemlist.add_item"
+    ></viewport>
+    <itemlist
+    ref="itemlist"
+    ></itemlist>
 
-   <div class="right">
-     <props ref="props"></props>
-     <minimap></minimap>
+   <div class="right" @keyup.stop="">
+     <props ref="props"
+
+     :item="$refs.viewport&&$refs.viewport.selectitem"
+
+     :edge="$refs.viewport&&$refs.viewport.selectedge"></props>
+     <minimap ref="minimap" :position="$refs.viewport&&$refs.viewport.getPosition()"></minimap>
 
    </div>
   </div>
@@ -74,17 +84,20 @@ height: 100%;
 {
   width: 200px;
   height: 100%;
-  display: flex;
-  flex-direction: column;
   border-left: 1px solid #E6E9ED;
   position: absolute;
   right: 0px;
 }
 .main .right .props{
-  flex-grow: 1;
-  height: calc(100% - 160px);
+  height: calc(100% - 200px);
+}
+.main .right .minimap{
+  height:200px;
 }
 .top{
   z-index:1;
+}
+.add-cursor{
+  cursor: copy!important;
 }
 </style>
