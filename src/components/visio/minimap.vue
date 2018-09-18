@@ -11,7 +11,7 @@
       v-html="svg">
 
       </svg>
-      <div class="mask">
+      <div class="mask" v-if="position">
         <div class="row" :style="{'height':`${((position.width/2-position.y/position.scale)/5000-0.2/position.scale/2/(1000/1000))*100}%`}">
 
         </div>
@@ -41,7 +41,7 @@ export default {
     position:{
       type:Object,
       default(){
-        return {};
+        return null;
       },
     },
   },

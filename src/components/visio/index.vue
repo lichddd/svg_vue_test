@@ -1,14 +1,17 @@
 <template>
 <div class="visio">
 <buttonbar class="top" ref="buttonbar" @COMMOND="(code)=>{$refs.viewport.commond(code);}"></buttonbar>
-  <div class="main" :class="{'add-cursor':$refs.itemlist&&$refs.itemlist.add_item}">
+  <div class="main" :class="{'add-cursor':add}">
     <viewport
     ref="viewport"
     @STATE_CHANGE="(data,svg)=>{$refs.buttonbar.updateState(data);$refs.minimap.updateSVG(svg)}"
-    :add_item="$refs.itemlist&&$refs.itemlist.add_item"
+    @POSITION="(position)=>{this.position=position;}"
+    :add_item="add_item"
     ></viewport>
     <itemlist
     ref="itemlist"
+      @ADD="(item)=>{add_item=item;}"
+      @REMOVE_ADD="add_item=null"
     ></itemlist>
 
    <div class="right" @keyup.stop="">
@@ -17,7 +20,7 @@
      :item="$refs.viewport&&$refs.viewport.selectitem"
 
      :edge="$refs.viewport&&$refs.viewport.selectedge"></props>
-     <minimap ref="minimap" :position="$refs.viewport&&$refs.viewport.getPosition()"></minimap>
+     <minimap ref="minimap" :position="position"></minimap>
 
    </div>
   </div>
@@ -40,11 +43,22 @@ export default {
     viewport,
   },
   data() {
-    return {}
+    return {
+      add_item:null,
+      position:null,
+
+    }
   },
   props: {
   },
   computed:{
+    add(){
+      if(this.$refs.itemlist&&this.$refs.itemlist.add_item)
+      {
+        return true;
+      }
+      return false;
+    },
   },
   watch:{
   },

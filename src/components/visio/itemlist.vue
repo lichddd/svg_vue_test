@@ -149,9 +149,11 @@ export default {
               x: -9999,
               y: -9999,
               }, item);
+      this.$emit('ADD',this.add_item);
     },
     removeAdd(){
       this.add_item=null;
+      this.$emit('REMOVE_ADD');
     }
   }
 }

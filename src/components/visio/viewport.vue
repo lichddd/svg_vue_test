@@ -112,6 +112,7 @@ export default {
   mounted() {
     this.doChange();
     this.changeState();
+    this.$emit('POSITION',this.position);
     document.addEventListener('keyup', this.pressKey);
   },
   beforeDestroy() {
@@ -155,9 +156,6 @@ export default {
               break;
         default:
       }
-    },
-    getPosition(){
-      return this.position;
     },
     del() {
       if (this.selectitem) {

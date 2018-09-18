@@ -16,7 +16,7 @@
       </template></template>
       <template v-if="edge">
 
-        {{edge.from.item.name}}->{{edge.to.item.name}}
+        {{edge.from&&edge.from.item.name}}->{{edge.to&&edge.to.item.name}}
 
       </template>
 
@@ -31,13 +31,13 @@ export default {
     item:{
       type:Object,
       default(){
-        return {};
+        return null;
       },
     },
     edge:{
       type:Object,
       default(){
-        return {};
+        return null;
       },
     },
   },
