@@ -80,13 +80,13 @@ export default {
       width:1000,
       gap:100,
       default_items:[
-        {name:"常规节点",shape:"rect",width:160,height:120,radius:10,color:"#321455"},
+        {name:"常规节点",shape:"rect",width:80,height:60,radius:10,color:"#321455"},
         //ellipse形状如要正圆肯定是长宽相等
         {name:"起止节点",shape:"ellipse",width:80,height:60,color:"#3ff455"},
         //polygon多边形形状会按照长宽和节点数生成节点以中心平均分布在360°上
         {name:"分叉节点",shape:"polygon",width:80,height:50,point_num:4,color:"#321ff5"},
         //path形状的d属性为一个路径里面需要有长宽属性作为变量 写作 @width/2@ @height*2@ 用@与普通文本分隔开
-        {name:"模型节点",shape:"path",width:160,height:80,color:"#3ffff5",
+        {name:"模型节点",shape:"path",width:80,height:40,color:"#3ffff5",
         d:"M-@width/4@,-@height/2@ H@width/4@ A@width/4@,@height/2@,0,0,1,@width/4@,@height/2@  H-@width/4@ A@width/4@,@height/2@,0,0,1,-@width/4@,-@height/2@",
         anchors:[ {x:-1/2,y:0},
                   {x:0,y:-1/2},

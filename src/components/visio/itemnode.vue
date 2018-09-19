@@ -4,18 +4,25 @@
   class="item"
   :class="{'select':selectitem==item}"
   >
+    <defs>
+        <pattern id="avatar" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image width="1" height="1" xlink:href="../../assets/logo.png"/>
+        </pattern>
+    </defs>
     <ellipse
     v-if="item.shape=='ellipse'"
-    :rx="item.width"
-    :ry="item.height"
-    :fill="item.color"
-    ></ellipse>
+    :rx="item.width/2"
+    :ry="item.height/2"
+    fill="url(#avatar)"
+    >
+
+    </ellipse>
     <rect
     :x="-item.width/2"
     :y="-item.height/2"
     v-if="item.shape=='rect'"
-    :rx="item.radius/item.width"
-    :ry="item.radius/item.height"
+    :rx="item.radius"
+    :ry="item.radius"
     :width="item.width"
     :height="item.height"
     :fill="item.color"
@@ -28,6 +35,9 @@
     v-if="item.shape=='path'"
     :fill="item.color"
     :d="util.getD(item.width,item.height,item.d)"/>
+
+    <!-- <image :x='-item.width/2' :y='-item.height/2' :width='item.width' :height='item.height' xlink:href='../../assets/logo.png' ></image> -->
+
     <text text-anchor="middle" :x="0" :y="8">{{item.name}}</text>
     <g>
       <g
@@ -49,29 +59,6 @@
         :r="8/scale*1.5"/>
 
       </g>
-
-
-
-      <!-- <template v-if="item.shape=='rect'">
-        <circle :cx="-item.width/2" :cy="0" r="8"/>
-        <circle :cx="item.width/2" :cy="0" r="8"/>
-        <circle :cx="0" :cy="-item.height/2" r="8"/>
-        <circle :cx="0" :cy="item.height/2" r="8"/>
-      </template>
-      <template v-if="item.shape=='ellipse'">
-        <circle :cx="-item.width" :cy="0" r="8"/>
-        <circle :cx="item.width" :cy="0" r="8"/>
-        <circle :cx="0" :cy="-item.height" r="8"/>
-        <circle :cx="0" :cy="item.height" r="8"/>
-      </template>
-
-      <template v-if="item.shape=='polygon'">
-        <circle v-for="a in util.getPointsAnchor(item)" :cx="a.x" :cy="a.y" r="8"/>
-      </template>
-
-      <template v-if="item.shape=='path'">
-        <circle v-for="a in util.getPathAnchor(item)" :cx="a.x" :cy="a.y" r="8"/>
-      </template> -->
     </g>
   </g>
 </template>
@@ -127,8 +114,8 @@ export default {
   stroke: #000000;
   transition: stroke-width 0.5s;
   cursor: move;
-}
 
+}
 .item:hover {
   stroke-width: 5;
 }

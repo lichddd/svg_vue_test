@@ -48,7 +48,7 @@
               <itemnode
               v-if="add_item"
               :item='add_item'
-              style="point-events:none"
+              style="cursor:copy!important;"
 
               ></itemnode>
 
