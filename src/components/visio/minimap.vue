@@ -100,6 +100,7 @@ export default {
   width: 100%;
   height: calc(100% - 30px);
   overflow: hidden;
+  position: relative;
 }
 .continer svg{
   width: 100%;

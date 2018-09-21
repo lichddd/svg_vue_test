@@ -1,16 +1,6 @@
 <template>
   <div class="main">
-    <!-- <button type="button" name="button" @click="aaa()">aaa</button>
-    <transition-group name="flip-list" tag="span">
-<span  v-for="l in list" :key="l">{{l}}</span>
-</transition-group>
-<div>
-  <transition-group name="flip-list" tag="div">
-    <div v-for="l in list" :key="l">
-      {{ l }}
-    </div>
-  </transition-group> -->
-<!-- </div> -->
+
     <div class="menu">
 
       <router-link style="margin-right:20px;" :key="r.name" v-for="r in router" v-if="r.name" :to="r.path">{{r.name}}</router-link>
@@ -46,19 +36,7 @@ export default {
   }
 }
 </script>
-
-<style>
-*{
-  box-sizing: border-box;
-}
-body{
-  margin: 0px;
-  padding: 0px;
-}
-.flip-list-move
-{
-  transition:transform 1s;
-}
+<style scoped>
   .main{
     position: absolute;
     width: 100%;
@@ -76,4 +54,14 @@ body{
     position: absolute;
     overflow: hidden;
   }
+</style>
+<style>
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 0px;
+  padding: 0px;
+}
+
 </style>
